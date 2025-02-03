@@ -1,14 +1,26 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
+import prisma from "../../../lib/prisma";
 import bcrypt from "bcryptjs";
 
 export async function POST(req: Request) {
-  const { name, email, password } = await req.json();
-  const hashedPassword = await bcrypt.hash(password, 10);
+  try {
+    console.log("API Route Triggered");
+    const body = await req.json();
 
-  const user = await prisma.user.create({
-    data: { name, email, password: hashedPassword }
-  });
+    if (!body.name || !body.email || !body.password) {
+      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+    }
 
-  return NextResponse.json({ user }, { status: 201 });
+    const hashedPassword = await bcrypt.hash(body.password, 10);
+
+    const user = await prisma.student.create({
+      data: { name: body.name, email: body.email, password: hashedPassword },
+    });
+
+    return NextResponse.json({ user }, { status: 201 });
+
+  } catch (error) {
+    console.error("Error in registration:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
 }
