@@ -4,9 +4,10 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useState } from 'react';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
+import { useRouter } from "next/navigation";
 
-const Router = dynamic(() => import('next/router'), { ssr: false });
+// const Router = dynamic(() => import('next/router'), { ssr: false });
 
 const schema = z.object({
   email: z.string().email('Invalid email'),
@@ -21,6 +22,8 @@ export default function LoginForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
+
+  const router = useRouter();
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -41,7 +44,7 @@ export default function LoginForm() {
       setMessage('Login successful!');
       // Redirect to the dashboard after a short delay
       setTimeout(() => {
-        Router.push("/pages/dashboard"); // Redirect to the dashboard
+        router.push("/pages/dashboard"); // Redirect to the dashboard
       }, 1000); // 1-second delay before redirecting
     } catch (error) {
       setMessage('Error registering user');
