@@ -142,7 +142,7 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 ---
 
 ## 👨‍💻 Author
-Developed by **Shamim Reza**. Connect with me on [GitHub](https://github.com/yourusername).
+Developed by **Shamim Reza**. Connect with me on [GitHub](https://github.com/shamim90123).
 
 ---
 
