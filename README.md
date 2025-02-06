@@ -1,13 +1,13 @@
-# Student Portal
+# NextCraft
 
-A full-stack **Student Portal** application built with **Next.js 13+ (App Router)** and **Prisma ORM** for managing student applications. This portal enables students to register, log in, and apply for various services. The application includes a dashboard, application form, and application status tracking.
+A full-stack **NextCraft** application built with **Next.js 13+ (App Router)** and **Prisma ORM** for managing student applications. This portal enables user's to register, log in, and apply for various services. The application includes a dashboard, application form, and application status tracking.
 
 ---
 
 ## 🚀 Features
 
 ### 🔐 Authentication
-- Student login and registration
+- login and registration
 - JWT-based authentication
 
 ### 📊 Dashboard
@@ -15,7 +15,7 @@ A full-stack **Student Portal** application built with **Next.js 13+ (App Router
 - User-friendly interface
 
 ### 📂 Application Management
-- **New Application**: Start a new student application
+- **New Application**: Start a new application
 - **Application List**: View application status
 
 ### 📝 Application Process
@@ -48,8 +48,8 @@ A full-stack **Student Portal** application built with **Next.js 13+ (App Router
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/yourusername/student-portal.git
-cd student-portal
+git clone https://github.com/yourusername/next.git
+cd next
 ```
 
 ### 2️⃣ Install Dependencies
@@ -64,7 +64,7 @@ pnpm install
 ### 3️⃣ Set Up the Database
 Ensure you have MySQL running, then create a `.env` file in the project root:
 ```env
-DATABASE_URL="mysql://root:@127.0.0.1:3306/student_portal"
+DATABASE_URL="mysql://root:@127.0.0.1:3306/next"
 ```
 
 ### 4️⃣ Initialize Prisma
@@ -112,7 +112,7 @@ student-portal/
 
 ### 2️⃣ Application Process
 - The application process is divided into multiple steps.
-- Students provide personal, academic, and supporting document details.
+- Users provide personal, academic, and supporting document details.
 - Data is stored and managed using Prisma ORM.
 
 ### 3️⃣ Prisma ORM & Database
