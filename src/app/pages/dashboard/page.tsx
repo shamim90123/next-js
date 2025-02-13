@@ -1,5 +1,30 @@
-export default function Dashboad() {
-    return (
-        <h2 className="text-2xl font-thin mb-4 text-center uppercase">Welcome to Dashboard</h2>
-    )
+"use client";
+
+import { useEffect, useState } from "react";
+
+export default function Dashboard() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    fetch("/api/user", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => res.json())
+      .then((data) => setUser(data))
+      .catch(() => localStorage.removeItem("token"));
+  }, []);
+
+  if (!user) return <p>Loading...</p>;
+
+  return (
+    <div>
+      <h1>Welcome, {user.name}</h1>
+      <p>Email: {user.email}</p>
+      <button onClick={() => { localStorage.removeItem("token"); window.location.href = "/"; }}>
+        Logout
+      </button>
+    </div>
+  );
 }

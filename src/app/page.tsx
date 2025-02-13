@@ -27,6 +27,7 @@ export default function LoginForm() {
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const [error, setError] = useState("");
 
   const onSubmit = async (data: FormData) => {
     setLoading(true);
@@ -40,6 +41,14 @@ export default function LoginForm() {
       });
 
       if (!res.ok) throw new Error('Login failed');
+
+      const authData = await res.json();
+      if (res.ok) {
+        localStorage.setItem("token", authData.token); // Store token
+        window.location.href = "/pages/dashboard"; // Redirect
+      } else {
+        setError(authData.error);
+      }
 
       setMessage('Login successful!');
       // Redirect to the dashboard after a short delay
@@ -55,6 +64,7 @@ export default function LoginForm() {
   return (
     <div className="max-w-md mx-auto p-16 mt-20 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-thin mb-4 text-center uppercase">Login Form</h2>
+      {error && <p style={{ color: "red" }}>{error}</p>}
       {message && <p className="mb-4 text-center text-green-600">{message}</p>}
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div> 
