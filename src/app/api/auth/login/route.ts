@@ -37,22 +37,7 @@ export async function POST(req: Request) {
     const token = generateToken(user.id);
 
     return NextResponse.json({ token, user: { id: user.id, name: user.name, email: user.email } });
- 
 
-    // Compare the provided password with the hashed password in the database
-    // const isPasswordValid = await bcrypt.compare(body.password, user.password);
-
-    // // If passwords don't match, return an error
-    // if (!isPasswordValid) {
-    //   return NextResponse.json(
-    //     { error: "Invalid email or password" },
-    //     { status: 401 }
-    //   );
-    // }
-
-    // If everything is valid, return the user (excluding the password)
-    // const { password, ...userWithoutPassword } = user;
-    // return NextResponse.json({ user: userWithoutPassword }, { status: 200 });
 
   } catch (error) {
     console.error("Error in login:", error);
