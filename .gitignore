@@ -9,9 +9,8 @@
 !.yarn/versions
 
 # lock files
-+ /package-lock.json  # Ignore package-lock.json
 + /yarn.lock          # Ignore yarn.lock if using Yarn
-/package-lock.json
+
 # testing
 /coverage
 
