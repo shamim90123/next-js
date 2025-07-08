@@ -61,21 +61,26 @@ export default function LoginForm() {
     setLoading(false);
   };
 
-  return (
-    <div className="max-w-md mx-auto p-16 mt-20 bg-white shadow-lg rounded-lg">
+ return (
+  <div className="w-screen min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="w-full max-w-md p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-thin mb-4 text-center uppercase">Login Form</h2>
+
       {error && <p style={{ color: "red" }}>{error}</p>}
       {message && <p className="mb-4 text-center text-green-600">{message}</p>}
+
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <div> 
+        <div>
           <label className="block text-sm font-medium">Email</label>
           <input
-          type="email"
+            type="email"
             {...register('email')}
             className="w-full p-2 border rounded"
             placeholder="Enter your email"
           />
-          {errors.email && <p className="text-red-600 text-sm">{errors.email.message}</p>}
+          {errors.email && (
+            <p className="text-red-600 text-sm">{errors.email.message}</p>
+          )}
         </div>
 
         <div>
@@ -86,7 +91,9 @@ export default function LoginForm() {
             className="w-full p-2 border rounded"
             placeholder="Enter your password"
           />
-          {errors.password && <p className="text-red-600 text-sm">{errors.password.message}</p>}
+          {errors.password && (
+            <p className="text-red-600 text-sm">{errors.password.message}</p>
+          )}
         </div>
 
         <button
@@ -97,8 +104,18 @@ export default function LoginForm() {
           {loading ? 'Login...' : 'Login'}
         </button>
 
-        <p className="text-gray-800 text-sm mt-6 text-center">Don't have an account? <a href="pages/register" className="text-blue-600 font-semibold hover:underline ml-1">Register here</a></p>
+        <p className="text-gray-800 text-sm mt-6 text-center">
+          Don't have an account?
+          <a
+            href="/register"
+            className="text-blue-600 font-semibold hover:underline ml-1"
+          >
+            Register here
+          </a>
+        </p>
       </form>
     </div>
-  );
+  </div>
+);
+
 }
