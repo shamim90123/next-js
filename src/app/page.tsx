@@ -64,7 +64,7 @@ export default function LoginForm() {
  return (
   <div className="w-screen min-h-screen flex items-center justify-center bg-gray-100">
     <div className="w-full max-w-md p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-thin mb-4 text-center uppercase">Login Form</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
       {message && <p className="mb-4 text-center text-green-600">{message}</p>}
