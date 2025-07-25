@@ -27,12 +27,9 @@ export default function LoginForm() {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState("");
 
   const onSubmit = async (data: FormData) => {
     setLoading(true);
-    setMessage('');
 
     try {
       const res = await fetch('/api/auth/login', {
@@ -41,36 +38,38 @@ export default function LoginForm() {
         body: JSON.stringify(data),
       });
 
-      if (!res.ok) throw new Error('Login failed');
-
       const authData = await res.json();
-      if (res.ok) {
-        localStorage.setItem("token", authData.token); // Store token
-        window.location.href = "/pages/dashboard"; // Redirect
-      } else {
-        setError(authData.error);
+
+      if (!res.ok) {
+        showToastError(authData.error || 'Login failed. Please try again.');
+        setLoading(false);
+        return;
       }
 
-      setMessage('Login successful!');
+      // Success: Store token
+      localStorage.setItem("token", authData.token);
+
+      // Show success toast
       showToastSuccess('Login successful! Redirecting to dashboard...');
-      // Redirect to the dashboard after a short delay
+
+      // Wait a little so user sees the toast
       setTimeout(() => {
-        router.push("/pages/dashboard"); // Redirect to the dashboard
-      }, 1000); // 1-second delay before redirecting
+        router.push("/pages/dashboard");
+        setLoading(false);
+      }, 1500);
+
     } catch (error) {
       console.error('Login error:', error);
       showToastError('Login failed. Please try again.');
+      setLoading(false);
     }
-    setLoading(false);
   };
+
 
  return (
   <div className="w-screen min-h-screen flex items-center justify-center bg-gray-100">
     <div className="w-full max-w-md p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
-
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {message && <p className="mb-4 text-center text-green-600">{message}</p>}
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
