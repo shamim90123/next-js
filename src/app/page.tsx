@@ -6,6 +6,7 @@ import * as z from 'zod';
 import { useState } from 'react';
 // import dynamic from 'next/dynamic';
 import { useRouter } from "next/navigation";
+import { showToastSuccess, showToastError } from '@/app/utils/alert';
 
 // const Router = dynamic(() => import('next/router'), { ssr: false });
 
@@ -51,12 +52,14 @@ export default function LoginForm() {
       }
 
       setMessage('Login successful!');
+      showToastSuccess('Login successful! Redirecting to dashboard...');
       // Redirect to the dashboard after a short delay
       setTimeout(() => {
         router.push("/pages/dashboard"); // Redirect to the dashboard
       }, 1000); // 1-second delay before redirecting
     } catch (error) {
-      setMessage('Error registering user');
+      console.error('Login error:', error);
+      showToastError('Login failed. Please try again.');
     }
     setLoading(false);
   };
