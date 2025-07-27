@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
-import prisma from "../../../lib/prisma";
-import bcrypt from "bcryptjs";
-import { comparePassword, generateToken } from "../../../lib/auth";
+import prisma from "@/app/lib/prisma";
+import { comparePassword, generateToken } from "@/app/lib/auth";
 
 export async function POST(req: Request) {
   try {
