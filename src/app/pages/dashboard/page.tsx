@@ -15,6 +15,7 @@ export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const router = useRouter();
 
+  // check if user is logged in and fetch user data
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -38,6 +39,7 @@ export default function Dashboard() {
       });
   }, [router]);
 
+  // handle logout
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.href = "/";
